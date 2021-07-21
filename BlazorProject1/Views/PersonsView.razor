@@ -1,0 +1,26 @@
+﻿@page "/persons"
+
+@inject IPersonsViewmodel Persons
+
+
+<h3>Persons:</h3>
+
+<table class="table">
+    <tr>
+        
+        <th>Name</th>
+        <th></th>
+    </tr>
+    @foreach(var person in Persons.PersonList)
+            {
+                <tr>
+                    
+                    <td><a href="@($"/person/{person.PersonId}")">@person.FirstName @person.LastName</a></td>
+                    <td><button class="btn btn-danger"><a href="@($"/person/{person.PersonId}")">Edit</a></button></td>
+                 </tr>
+
+            }
+
+</table>
+
+
