@@ -1,5 +1,5 @@
 ﻿@page "/person/{id:int}"
-
+@page "/person"
 
 @inject IPersonsViewmodel person
 
@@ -8,29 +8,18 @@
 
 
 
-<EditForm Model="person" onValidSubmit="Handlelog">
-
-    <InputText></InputText>
-
-
-
-
-</EditForm>
-
-
-
     <form>
         <div class="form-group">
             <label for="">Ime:</label>
-            <input type="text" class="form-control" value="@person.PersonList[id-1].FirstName">
+            <input type="text" class="form-control" @bind-value="@person.PersonList[id-1].FirstName">
         </div>
         <div class="form-group">
             <label for="">Prezime:</label>
 
-            <input type="text" class="form-control" value="@person.PersonList[id-1].LastName">
+            <input type="text" class="form-control" @bind-value="@person.PersonList[id-1].LastName">
         </div>
 
-        <button type="submit" class="btn btn-primary" >Edit</button>
+        <button type="submit" class="btn btn-primary" > <a href="persons">Edit</a></button>
     </form>
 
 
