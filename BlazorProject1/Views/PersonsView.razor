@@ -1,26 +1,34 @@
 ﻿@page "/persons"
 
+
 @inject IPersonsViewmodel Persons
+@inject IToastService _toastService
 
-
-<h3>Persons:</h3>
-
+<h3>Contacts:</h3>
+<a class="btn btn-primary" href="person/add">Add new</a>
+<br /><br />
 <table class="table">
-    <tr>
-        
-        <th>Name</th>
-        <th></th>
-    </tr>
+    
     @foreach(var person in Persons.PersonList)
             {
-                <tr>
-                    
-                    <td><a href="@($"/person/{person.PersonId}")">@person.FirstName @person.LastName</a></td>
-                    <td><button class="btn btn-danger"><a href="@($"/person/{person.PersonId}")">Edit</a></button></td>
-                 </tr>
+    <tr>
+        <td><a href="@($"/person/{person.PersonId}")">@person.Name </a></td>
 
+        <button class="btn btn-primary" @onclick="()=>Call(person.Name)">Call</button>
+
+        <td><a href="@($"/person/{person.PersonId}")"><img style="height:20px; width:auto;" src="https://www.iconpacks.net/icons/1/free-information-icon-348-thumb.png" /></a></td>
+    </tr>
             }
 
 </table>
 
+@code {
+
+    public async Task Call(string name)
+    {
+        _toastService.ShowSuccess($"Calling {name}");
+
+    }
+
+}
 

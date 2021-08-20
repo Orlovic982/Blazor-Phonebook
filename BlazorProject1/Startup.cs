@@ -11,7 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BlazorProject1.ViewModels;
-
+using Blazored.Toast;
 
 namespace BlazorProject1
 {
@@ -31,7 +31,9 @@ namespace BlazorProject1
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddScoped<IPersonsViewmodel, PersonsViewmodel>();
-            
+            services.AddScoped<IPersonEditModel, PersonEditModel>();
+            services.AddBlazoredToast();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

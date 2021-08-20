@@ -1,30 +1,56 @@
 ﻿@page "/person/{id:int}"
 @page "/person"
 
-@inject IPersonsViewmodel person
+
+@inject IPersonEditModel person
+@inject NavigationManager _navigationMenager
 
 
-    <h3>Person Edit:</h3>
+<div class="card-deck" style="margin:auto">
 
+    <div class="card m-3" style="min-width:18rem; max-width:30.5%;">
+        <div class="card-header">
 
-
-    <form>
-        <div class="form-group">
             <label for="">Ime:</label>
-            <input type="text" class="form-control" @bind-value="@person.PersonList[id-1].FirstName">
+            <input type="text" class="form-control" @bind-value="@person.Name" />
+
         </div>
-        <div class="form-group">
-            <label for="">Prezime:</label>
+        <img class="card-img-top imageThumbnail" src="https://image.flaticon.com/icons/png/512/149/149071.png" />
+        <div class="card-footer text-center">
+            <label for="">Telefon:</label>
 
-            <input type="text" class="form-control" @bind-value="@person.PersonList[id-1].LastName">
+            <input type="text" class="form-control" @bind-value="@person.PhoneNumber" />
         </div>
+        <div class="card-footer text-center">
+            <label for="">Email:</label>
 
-        <button type="submit" class="btn btn-primary" > <a href="persons">Edit</a></button>
-    </form>
+            <input type="text" class="form-control" @bind-value="@person.Email" />
+        </div>
+        <div class="card-footer text-center">
+
+            <a @onclick="NaviateHome" class="btn btn-primary m-1"> Edit </a>
+            <a href="#" class="btn btn-danger m-1">Delete</a>
+        </div>
+    </div>
+
+
+    
+
+</div>
 
 
 
-    @code {
-        [Parameter]
-        public int id { get; set; }
+@code {
+    [Parameter]
+    public int id { get; set; }
+
+    protected override void OnInitialized()
+    {
+        person.LoadPerson(id);
     }
+    private void NaviateHome()
+    {
+        _navigationMenager.NavigateTo("/persons");
+    }
+
+}

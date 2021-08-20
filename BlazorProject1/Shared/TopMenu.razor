@@ -1,0 +1,22 @@
+﻿@inject IPersonsViewmodel _person
+@implements IDisposable
+
+<div style="margin:auto">
+    Number of contacts:@_person.PresonListNumber
+</div>
+
+
+
+@code {   
+
+    protected override void OnInitialized()
+    {
+        _person.CounterChange += StateHasChanged;
+    }
+
+    public void Dispose()
+    {
+        _person.CounterChange -= StateHasChanged;
+    }
+
+}

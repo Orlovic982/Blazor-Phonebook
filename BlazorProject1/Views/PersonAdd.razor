@@ -1,0 +1,69 @@
+﻿@page "/person/add"
+
+@inject IPersonEditModel _person
+@inject NavigationManager _navigationManager
+@inject IPersonsViewmodel _persons
+
+    <h3>Add new contact</h3>
+
+<EditForm Model="@person" OnValidSubmit="@SavePerson">
+    <DataAnnotationsValidator />
+    
+        <div class="card-deck" style="margin:auto">
+
+        <div class="card m-3" style="min-width:18rem; max-width:30.5%;">
+            <div class="card-header">
+                <label for="">Contact Id:(Poslednji: @_persons.PresonListNumber)</label>
+                <InputNumber class="form-control" @bind-Value="person.PersonId"  />
+            </div>
+            <div class="card-header">
+                <label for="">Ime:</label>
+                <InputText type="text" class="form-control" @bind-Value="person.Name" placeholder="Unesite ime" />
+                <ValidationMessage For="@(()=>person.Name)" /> 
+            </div>
+            <img class="card-img-top imageThumbnail" src="https://image.flaticon.com/icons/png/512/149/149071.png" />
+            <div class="card-footer text-center">
+                <label for="">Telefon:</label>
+                <InputText type="text" class="form-control" @bind-Value="person.PhoneNumber" placeholder="Unesite telefon" />
+            </div>
+            <div class="card-footer text-center">
+                <label for="">Email:</label>
+                <InputText type="text" class="form-control" @bind-Value="person.Email" placeholder="Unesite email" />
+                <ValidationMessage For="@(()=>person.Email)" />
+            </div>
+            <div class="card-footer text-center">
+                <input type="submit" @onclick="NavigateHome" class="btn btn-primary m-1" value="Add new" />
+                <a href="#" class="btn btn-danger m-1">Delete</a>
+            </div>
+        </div>
+
+    </div>
+
+    
+</EditForm>
+
+
+    @code {
+
+        public PersonBase person { get; set; }
+
+       
+
+        protected override void OnInitialized()
+        {
+            person = new PersonBase();
+           
+        }
+        private void SavePerson()
+        {
+            _person.Save(person);
+
+
+        }
+
+        private void NavigateHome()
+        {
+            _navigationManager.NavigateTo("/persons");
+        }
+
+    }
